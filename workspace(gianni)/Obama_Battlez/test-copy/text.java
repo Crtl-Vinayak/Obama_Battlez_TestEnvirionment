@@ -27,11 +27,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class text extends Actor {
     
     private String w_a_1 = "Willem used sneak attack";
+    GreenfootImage img = new GreenfootImage(200, 150);
     
     public text() {
-     GreenfootImage img = new GreenfootImage(200, 150);
      img.drawString(w_a_1, 2, 20);
      setImage(img);
+     //getWorld().removeObject(this);
     }
     
     /**
