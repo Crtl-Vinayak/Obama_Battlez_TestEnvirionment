@@ -1,3 +1,4 @@
+
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -14,6 +15,7 @@ public class HPbar extends Actor
     int pixelsPerHealthpoint = (int)healthbarwidth/health;
     int framez = 0;
     boolean clicked = false;
+    short totalclicks = 0;
     int damage = 20;
 
     public HPbar()
@@ -24,24 +26,29 @@ public class HPbar extends Actor
     public void act() 
     {
         framez++;
+        System.out.println(framez);
+        System.out.println(clicked);
+        System.out.println(totalclicks);
+        System.out.println(health);
         if(framez == 60) {
             framez = 0;
         }
-        update();
         if (Greenfoot.isKeyDown("enter")) {
            clicked = true;
+           totalclicks = 1;
+           framez = 0;
         }
-        if(clicked == true){
-            if(framez > damage){
-                clicked = false;
-            } else {
-                health -= 1;
-            }     
+        if(clicked == true & totalclicks == 1){
+            for(int i = 10; i < 60; i+=5){
+                if(framez == i) health -= damage / 10;
+            }
+            if(framez == 59) totalclicks = 0;
         }
+        update();
     }
         public void update()
         {
-            setImage(new GreenfootImage(healthbarwidth + 2,healthbarheight + 2));
+            setImage(new GreenfootImage(402,17));
             GreenfootImage myImage = getImage();
             myImage.setColor(Color.BLACK);
             myImage.drawRect(0,0, healthbarwidth +1, healthbarheight+1);
